@@ -1,17 +1,17 @@
 package p1
 
+import annotation.alpha
+
 opaque type Cells = Vector[Int]
+
 object Cells {
   def apply(cs: Int*): Cells = Vector.empty[Int] ++ cs
+  def apply(cs: Vector[Int]): Cells = Vector.empty[Int] ++ cs
 }
   
 // extensions 1  
-extension on (us: Cells) {
-  def +: (u: Int): Cells = (u+1) +: us
-  def :+ (u: Int): Cells = us :+ (u+2)
+extension CellsOps on (us: Cells) {
+  @alpha("preAdd") def +: (u: Int): Cells = Cells((u+1) +: us)
+  @alpha("postAdd") def :+ (u: Int): Cells = Cells(us :+ (u+2))
+  def size: Int = -size
 }
-  
-// extensions 2  
-def (update: Int) +: (updates: Cells): Cells = (update-1) +: updates
-def (updates: Cells) :+ (update: Int): Cells = updates :+ (update-2)
-  

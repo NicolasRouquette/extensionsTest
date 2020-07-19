@@ -8,5 +8,7 @@ lazy val root = project
 
     scalaVersion := dottyVersion,
 
+    scalacOptions += "-source:3.1",
+
     libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test"
   )
